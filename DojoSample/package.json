@@ -13,6 +13,7 @@
     "@bugfender/common": "^1.3.2",
     "@bugfender/rn-bugfender": "^2.2.1",
     "@bugfender/sdk": "^2.2.4",
+    "@dojo-engineering/react-native-pay-sdk": "github:dojo-engineering/react-native-pay-sdk",
     "react": "17.0.2",
     "react-native": "0.66.5"
   },
