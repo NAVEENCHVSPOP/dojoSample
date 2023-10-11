@@ -7,12 +7,14 @@
  */
 
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 const App = () => {
+  const handleCheckout = () => {};
+
   return (
     <View style={styles.mainViewStyle}>
-      <TouchableOpacity style={styles.btnViewStyle}>
+      <TouchableOpacity style={styles.btnViewStyle} onPress={handleCheckout}>
         <Text style={styles.txtStyle}>Checkout</Text>
       </TouchableOpacity>
     </View>
