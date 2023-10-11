@@ -7,10 +7,18 @@
  */
 
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text, Alert} from 'react-native';
+import {startSetupFlow} from '@dojo-engineering/react-native-pay-sdk';
 
 const App = () => {
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    startSetupFlow({
+      intentId: 'si_sandbox_6ZslI6tkLkWbubqlASahEw',
+    }).then(res => {
+      Alert.alert(`Result: ` + res);
+      console.log(`Result: ` + res);
+    });
+  };
 
   return (
     <View style={styles.mainViewStyle}>
