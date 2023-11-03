@@ -1,6 +1,7 @@
 package com.dojosample;
 
 import com.facebook.react.ReactActivity;
+import com.dojoreactnativepaysdk.DojoPay;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,5 +12,11 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "DojoSample";
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    DojoPay.init(this);
   }
 }
