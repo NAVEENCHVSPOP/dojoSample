@@ -1,4 +1,5 @@
 package com.dojosample;
+import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 import com.dojoreactnativepaysdk.DojoPay;
