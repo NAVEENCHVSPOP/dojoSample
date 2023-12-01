@@ -7,25 +7,51 @@
  */
 
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text, Alert} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Alert,
+  TextInput,
+  Platform,
+} from 'react-native';
 import {
   startSetupFlow,
   startPaymentFlow,
 } from '@dojo-engineering/react-native-pay-sdk';
 
 const App = () => {
-  const handleCheckout = () => {
+  const [setupIntent, setSetupIntent] = React.useState('');
+  const [paymentIntent, setPaymentIntent] = React.useState('');
+
+  // function getAppleMerchantId() {
+  //   let merchantId = `merchant.com.derwentlondon.dl.sandbox`;
+  //   return merchantId;
+  // }
+
+  const onChangeSetupIntent = text => {
+    console.log('setupIntent value:', text);
+    setSetupIntent(text);
+  };
+
+  const handleSetupIntentBtnPress = () => {
     startSetupFlow({
-      intentId: 'si_sandbox_ctAf6U4pNkqmMRx0UQ7W6w',
+      intentId: setupIntent,
     }).then(res => {
       Alert.alert(`Setup intent result: ` + res);
       console.log(`Setup intent result: ` + res);
     });
   };
 
+  const onChangePaymentIntent = text => {
+    console.log('paymentIntent value:', text);
+    setPaymentIntent(text);
+  };
+
   const handlePaymentIntentPress = () => {
     startPaymentFlow({
-      intentId: 'pi_sandbox_dcWwbxf6sUGU5yKe0MlZ5g',
+      intentId: paymentIntent,
       applePayMerchantId: 'merchant.com.derwentlondon.dl.sandbox',
     }).then(res => {
       Alert.alert(`Payment intent result: ` + res);
@@ -33,21 +59,32 @@ const App = () => {
     });
   };
 
-  // function getAppleMerchantId() {
-  //   let merchantId = `merchant.com.derwentlondon.dl.sandbox`;
-  //   return merchantId;
-  // }
-
   return (
     <View style={styles.mainViewStyle}>
-      <TouchableOpacity style={styles.btnViewStyle} onPress={handleCheckout}>
-        <Text style={styles.txtStyle}>Setup Flow</Text>
+      <TextInput
+        style={styles.setupIntentTIStyle}
+        onChangeText={text => onChangeSetupIntent(text)}
+        value={setupIntent}
+        placeholder="Setup intent"
+      />
+      <TouchableOpacity
+        style={styles.setupIntentBtnViewStyle}
+        onPress={handleSetupIntentBtnPress}>
+        <Text style={styles.txtStyle}>Add card flow</Text>
       </TouchableOpacity>
 
+      <TextInput
+        style={styles.paymentIntentTIStyle}
+        onChangeText={text => onChangePaymentIntent(text)}
+        value={paymentIntent}
+        placeholder="Payment intent"
+      />
       <TouchableOpacity
-        style={styles.btnView2Style}
+        style={styles.paymentIntentBtnViewStyle}
         onPress={handlePaymentIntentPress}>
-        <Text style={styles.txtStyle}>Payment Flow</Text>
+        <Text style={styles.txtStyle}>
+          {Platform.OS === 'ios' ? 'Apple pay flow' : 'Google pay flow'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -59,17 +96,35 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  btnViewStyle: {
+  setupIntentTIStyle: {
+    paddingHorizontal: 10,
+    width: 300,
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  setupIntentBtnViewStyle: {
+    marginTop: 10,
     width: 120,
-    height: 50,
+    height: 40,
     backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  btnView2Style: {
+  paymentIntentTIStyle: {
     marginTop: 20,
+    paddingHorizontal: 10,
+    width: 300,
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  paymentIntentBtnViewStyle: {
+    marginTop: 10,
     width: 120,
-    height: 50,
+    height: 40,
     backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
