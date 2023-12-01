@@ -195,24 +195,6 @@ android {
     }
 }
 
-repositories {
-    maven {
-        credentials {
-             username = project.findProperty("gpr.user")
-             password = project.findProperty("gpr.key")
-        }
-        url = uri("https://maven.pkg.github.com/Dojo-Engineering/android-dojo-pay-sdk")
-    }
-    maven {
-        credentials { 
-            // Contact Dojo support for credentials
-            username = project.findProperty("cardinal.user")
-            password = project.findProperty("cardinal.key")
-        }
-        url = uri("https://cardinalcommerceprod.jfrog.io/artifactory/android")
-    }
-}
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
